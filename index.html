@@ -85,149 +85,143 @@
       </article>
       <div>
       <p><b>Abstract: </b>
-Front-end speech processing algorithms, such as
-denoising, de-reverberation, and speech separation, are widely
-adopted both as standalone applications and as preprocessing
-steps for downstream tasks. However, the processing can be
-insufficient, leaving residual noises or introducing new artifacts.
-These issues are often not reflected in terms of metrics such
-as SI-SNR but are more apparent in the perceptual quality
-experienced by listeners. In this work, we propose SpeechRefiner
-to tackle this problem. SpeechRefiner is a post-processor that
-can be integrated with different front-end algorithms. Our
-experiments demonstrate that the proposed model, trained on
-a single impairment source, can generalize to different ones,
-significantly improving the perceptual quality of the audio.
+Front-end speech processing algorithms, such as denoising,2
+de-reverberation, and speech separation, are widely adopted3
+both as standalone applications and as preprocessing steps for4
+downstream tasks. However, the processing can be insufficient,5
+leaving residual noises or introducing new artifacts. These is-6
+sues are often not reflected in terms of metrics such as SI-SNRi7
+but are more apparent in the perceptual quality experienced8
+by listeners. In this work, we propose SpeechRefiner, a post-9
+processor that leverages Conditional Flow Matching (CFM) to10
+enhance speech perceptual quality. SpeechRefiner can be in-11
+tegrated with different front-end algorithms. We first compare12
+our method with several recently proposed task-specific refine-13
+ment baselines and then validate its effectiveness on an internal14
+processing pipeline that incorporates multiple front-end algo-15
+rithms. Experimental results demonstrate that SpeechRefiner16
+exhibits strong generalization ability across diverse impairment17
+sources, significantly improving speech perceptual quality.
 	  <br /><br />
       <img src="./images/1.jpg" width="700px" class="center"/>
           <br />
       </p>
 
-<hr>
-<h2 id="intermediate">Comparison on different steps:</h2>
-<p>
-This section shows samples  for SpeechRefiner on Denoise(in-domain) dataset at different ode steps.
-</p>
-<p>
-<div style="overflow-x: auto;">
-<table border="1" style="border-collapse: collapse; white-space: nowrap;">
-<tbody>
+<!--<hr>-->
+<!--<h2 id="intermediate">Comparison on different steps:</h2>-->
+<!--<p>-->
+<!--This section shows samples  for SpeechRefiner on Denoise(in-domain) dataset at different ode steps.-->
+<!--</p>-->
+<!--<p>-->
+<!--<div style="overflow-x: auto;">-->
+<!--<table border="1" style="border-collapse: collapse; white-space: nowrap;">-->
+<!--<tbody>-->
 
-    <tr>
-        <th align="center"> Audio No.<br /></th>
-        <th align="center"> Distorted Speech<br /></th>
-        <th align="center"> 1 steps<br /></th>
-        <th align="center"> 8 steps<br /></th>
-        <th align="center"> 16 steps<br /></th>
-        <th align="center"> 32 steps<br /></th>
-        <th align="center"> 64 steps<br /></th>
-        <th align="center"> 128 steps<br /></th>
-    </tr>
-    <tr>
-         <th align="center">1</th>
-        <td align="center"> <audio controls=""><source src="./audio/tencent/noisy/1089_134686_000002_000001_noise_out_3a.wav"></audio> </td>
-        <td align="center"> <audio controls=""><source src="./audio/tencent/1/1089_134686_000002_000001_noise_out_3a.wav"></audio> </td>
-        <td align="center"> <audio controls=""><source src="./audio/tencent/8/1089_134686_000002_000001_noise_out_3a.wav"></audio> </td>
-        <td align="center"> <audio controls=""><source src="./audio/tencent/16/1089_134686_000002_000001_noise_out_3a.wav"></audio> </td>
-        <td align="center"> <audio controls=""><source src="./audio/tencent/32/1089_134686_000002_000001_noise_out_3a.wav"></audio> </td>
-        <td align="center"> <audio controls=""><source src="./audio/tencent/64/1089_134686_000002_000001_noise_out_3a.wav"></audio> </td>
-        <td align="center"> <audio controls=""><source src="./audio/tencent/128/1089_134686_000002_000001_noise_out_3a.wav"></audio> </td>
-    </tr>
-   <tr>
-       <th align="center">2</th>
-     <td align="center"> <audio controls=""><source src="./audio/tencent/noisy/1089_134686_000002_000002_noise_out_3a.wav"></audio> </td>
-        <td align="center"> <audio controls=""><source src="./audio/tencent/1/1089_134686_000002_000002_noise_out_3a.wav"></audio> </td>
-        <td align="center"> <audio controls=""><source src="./audio/tencent/8/1089_134686_000002_000002_noise_out_3a.wav"></audio> </td>
-        <td align="center"> <audio controls=""><source src="./audio/tencent/16/1089_134686_000002_000002_noise_out_3a.wav"></audio> </td>
-        <td align="center"> <audio controls=""><source src="./audio/tencent/32/1089_134686_000002_000002_noise_out_3a.wav"></audio> </td>
-        <td align="center"> <audio controls=""><source src="./audio/tencent/64/1089_134686_000002_000002_noise_out_3a.wav"></audio> </td>
-        <td align="center"> <audio controls=""><source src="./audio/tencent/128/1089_134686_000002_000002_noise_out_3a.wav"></audio> </td>
-    </tr>
-    <tr>
-        <th align="center">3</th>
-        <td align="center"> <audio controls=""><source src="./audio/tencent/noisy/1089_134686_000009_000007_noise_out_3a.wav"></audio> </td>
-        <td align="center"> <audio controls=""><source src="./audio/tencent/1/1089_134686_000009_000007_noise_out_3a.wav"></audio> </td>
-        <td align="center"> <audio controls=""><source src="./audio/tencent/8/1089_134686_000009_000007_noise_out_3a.wav"></audio> </td>
-        <td align="center"> <audio controls=""><source src="./audio/tencent/16/1089_134686_000009_000007_noise_out_3a.wav"></audio> </td>
-        <td align="center"> <audio controls=""><source src="./audio/tencent/32/1089_134686_000009_000007_noise_out_3a.wav"></audio> </td>
-        <td align="center"> <audio controls=""><source src="./audio/tencent/64/1089_134686_000009_000007_noise_out_3a.wav"></audio> </td>
-        <td align="center"> <audio controls=""><source src="./audio/tencent/128/1089_134686_000009_000007_noise_out_3a.wav"></audio> </td>
-    </tr>
-  <tr>
-        <th align="center">4</th>
-        <td align="center"> <audio controls=""><source src="./audio/tencent/noisy/1089_134686_000011_000001_noise_out_3a.wav"></audio> </td>
-        <td align="center"> <audio controls=""><source src="./audio/tencent/1/1089_134686_000011_000001_noise_out_3a.wav"></audio> </td>
-        <td align="center"> <audio controls=""><source src="./audio/tencent/8/1089_134686_000011_000001_noise_out_3a.wav"></audio> </td>
-        <td align="center"> <audio controls=""><source src="./audio/tencent/16/1089_134686_000011_000001_noise_out_3a.wav"></audio> </td>
-        <td align="center"> <audio controls=""><source src="./audio/tencent/32/1089_134686_000011_000001_noise_out_3a.wav"></audio> </td>
-        <td align="center"> <audio controls=""><source src="./audio/tencent/64/1089_134686_000011_000001_noise_out_3a.wav"></audio> </td>
-        <td align="center"> <audio controls=""><source src="./audio/tencent/128/1089_134686_000011_000001_noise_out_3a.wav"></audio> </td>
-    </tr>
+<!--    <tr>-->
+<!--        <th align="center"> Audio No.<br /></th>-->
+<!--        <th align="center"> Distorted Speech<br /></th>-->
+<!--        <th align="center"> 1 steps<br /></th>-->
+<!--        <th align="center"> 8 steps<br /></th>-->
+<!--        <th align="center"> 16 steps<br /></th>-->
+<!--        <th align="center"> 32 steps<br /></th>-->
+<!--        <th align="center"> 64 steps<br /></th>-->
+<!--        <th align="center"> 128 steps<br /></th>-->
+<!--    </tr>-->
+<!--    <tr>-->
+<!--         <th align="center">1</th>-->
+<!--        <td align="center"> <audio controls=""><source src="./audio/tencent/noisy/1089_134686_000002_000001_noise_out_3a.wav"></audio> </td>-->
+<!--        <td align="center"> <audio controls=""><source src="./audio/tencent/1/1089_134686_000002_000001_noise_out_3a.wav"></audio> </td>-->
+<!--        <td align="center"> <audio controls=""><source src="./audio/tencent/8/1089_134686_000002_000001_noise_out_3a.wav"></audio> </td>-->
+<!--        <td align="center"> <audio controls=""><source src="./audio/tencent/16/1089_134686_000002_000001_noise_out_3a.wav"></audio> </td>-->
+<!--        <td align="center"> <audio controls=""><source src="./audio/tencent/32/1089_134686_000002_000001_noise_out_3a.wav"></audio> </td>-->
+<!--        <td align="center"> <audio controls=""><source src="./audio/tencent/64/1089_134686_000002_000001_noise_out_3a.wav"></audio> </td>-->
+<!--        <td align="center"> <audio controls=""><source src="./audio/tencent/128/1089_134686_000002_000001_noise_out_3a.wav"></audio> </td>-->
+<!--    </tr>-->
+<!--   <tr>-->
+<!--       <th align="center">2</th>-->
+<!--     <td align="center"> <audio controls=""><source src="./audio/tencent/noisy/1089_134686_000002_000002_noise_out_3a.wav"></audio> </td>-->
+<!--        <td align="center"> <audio controls=""><source src="./audio/tencent/1/1089_134686_000002_000002_noise_out_3a.wav"></audio> </td>-->
+<!--        <td align="center"> <audio controls=""><source src="./audio/tencent/8/1089_134686_000002_000002_noise_out_3a.wav"></audio> </td>-->
+<!--        <td align="center"> <audio controls=""><source src="./audio/tencent/16/1089_134686_000002_000002_noise_out_3a.wav"></audio> </td>-->
+<!--        <td align="center"> <audio controls=""><source src="./audio/tencent/32/1089_134686_000002_000002_noise_out_3a.wav"></audio> </td>-->
+<!--        <td align="center"> <audio controls=""><source src="./audio/tencent/64/1089_134686_000002_000002_noise_out_3a.wav"></audio> </td>-->
+<!--        <td align="center"> <audio controls=""><source src="./audio/tencent/128/1089_134686_000002_000002_noise_out_3a.wav"></audio> </td>-->
+<!--    </tr>-->
+<!--    <tr>-->
+<!--        <th align="center">3</th>-->
+<!--        <td align="center"> <audio controls=""><source src="./audio/tencent/noisy/1089_134686_000009_000007_noise_out_3a.wav"></audio> </td>-->
+<!--        <td align="center"> <audio controls=""><source src="./audio/tencent/1/1089_134686_000009_000007_noise_out_3a.wav"></audio> </td>-->
+<!--        <td align="center"> <audio controls=""><source src="./audio/tencent/8/1089_134686_000009_000007_noise_out_3a.wav"></audio> </td>-->
+<!--        <td align="center"> <audio controls=""><source src="./audio/tencent/16/1089_134686_000009_000007_noise_out_3a.wav"></audio> </td>-->
+<!--        <td align="center"> <audio controls=""><source src="./audio/tencent/32/1089_134686_000009_000007_noise_out_3a.wav"></audio> </td>-->
+<!--        <td align="center"> <audio controls=""><source src="./audio/tencent/64/1089_134686_000009_000007_noise_out_3a.wav"></audio> </td>-->
+<!--        <td align="center"> <audio controls=""><source src="./audio/tencent/128/1089_134686_000009_000007_noise_out_3a.wav"></audio> </td>-->
+<!--    </tr>-->
+<!--  <tr>-->
+<!--        <th align="center">4</th>-->
+<!--        <td align="center"> <audio controls=""><source src="./audio/tencent/noisy/1089_134686_000011_000001_noise_out_3a.wav"></audio> </td>-->
+<!--        <td align="center"> <audio controls=""><source src="./audio/tencent/1/1089_134686_000011_000001_noise_out_3a.wav"></audio> </td>-->
+<!--        <td align="center"> <audio controls=""><source src="./audio/tencent/8/1089_134686_000011_000001_noise_out_3a.wav"></audio> </td>-->
+<!--        <td align="center"> <audio controls=""><source src="./audio/tencent/16/1089_134686_000011_000001_noise_out_3a.wav"></audio> </td>-->
+<!--        <td align="center"> <audio controls=""><source src="./audio/tencent/32/1089_134686_000011_000001_noise_out_3a.wav"></audio> </td>-->
+<!--        <td align="center"> <audio controls=""><source src="./audio/tencent/64/1089_134686_000011_000001_noise_out_3a.wav"></audio> </td>-->
+<!--        <td align="center"> <audio controls=""><source src="./audio/tencent/128/1089_134686_000011_000001_noise_out_3a.wav"></audio> </td>-->
+<!--    </tr>-->
 
-</tbody>
-</table><br />
-          </div>
-<p>*Please scroll horizontally to explore additional columns in the table.</p>
+<!--</tbody>-->
+<!--</table><br />-->
+<!--          </div>-->
+<!--<p>*Please scroll horizontally to explore additional columns in the table.</p>-->
 <hr>
 <h2 id="intermediate">Comparison on various speech front-end algorithms:</h2>
 <p>
-This section shows samples of different systems on various speech front-end algorithms. The “VoiceFixer[1]” serves as the ResUNet-based model from the original paper, while "VoiceFixer<sub>conformer</sub>" system is the ResUNet in VoiceFixer with the Conformer-based architecture same as SpeechRefiner. The “SpeechRefiner” represents our proposed model with 16 ode steps.
+This section presents samples from different systems across various speech front-end algorithms. Specifically, "SpeechRefiner (Specific)", corresponding to Table 2 of the paper, aims to evaluate SpeechRefiner against state-of-the-art refiners designed for specific front-end tasks. "SpeechRefiner (General)", corresponding to Table 3, is trained on the internal dataset to further validate the effectiveness of the proposed approach.
 </p>
 <p>
 
 <table border="1" style="border-collapse: collapse; white-space: nowrap;">
 <tbody>
 
-    <h3>Denoising: In-Domain </h3>
+    <h3>Speech Enhancement & Dereverberation: Internal </h3>
 
     <tr>
-        <th align="center"> Audio No.<br /></th>
-        <th align="center"> Distorted Speech<br /></th>
-        <th align="center"> VoiceFixer[1]<br /></th>
-        <th align="center"> VoiceFixer<sub>conformer</sub><br /></th>
-        <th align="center"> SpeechRefiner<br /></th>
+        <th align="center">Front-end algorithm <br /></th>
+        <th align="center"> Audio No.1<br /></th>
+        <th align="center"> Audio N0.2<br /></th>
+        <th align="center"> Audio N0.3<br /></th>
+        <th align="center"> Audio N0.4<br /></th>
     </tr>
      <tr>
-         <th align="center">1</th>
+         <th align="center">Distorted Speech</th>
         <td align="center"> <audio controls=""><source src="./audio/tencent/noisy/1089_134686_000002_000001_noise_out_3a.wav"></audio> </td>
-        <td align="center"> <audio controls=""><source src="./audio/tencent/vf/1089_134686_000002_000001_noise_out_3a.wav"></audio> </td>
-        <td align="center"> <audio controls=""><source src="./audio/tencent/cr/1089_134686_000002_000001_noise_out_3a.wav"></audio> </td>
-        <td align="center"> <audio controls=""><source src="./audio/tencent/16/1089_134686_000002_000001_noise_out_3a.wav"></audio> </td>
+         <td align="center"> <audio controls=""><source src="./audio/tencent/noisy/1089_134686_000002_000002_noise_out_3a.wav"></audio> </td>
+         <td align="center"> <audio controls=""><source src="./audio/tencent/noisy/1089_134686_000009_000007_noise_out_3a.wav"></audio> </td>
+         <td align="center"> <audio controls=""><source src="./audio/tencent/noisy/1089_134686_000011_000001_noise_out_3a.wav"></audio> </td>
     </tr>
    <tr>
-       <th align="center">2</th>
-     <td align="center"> <audio controls=""><source src="./audio/tencent/noisy/1089_134686_000002_000002_noise_out_3a.wav"></audio> </td>
-        <td align="center"> <audio controls=""><source src="./audio/tencent/vf/1089_134686_000002_000002_noise_out_3a.wav"></audio> </td>
-        <td align="center"> <audio controls=""><source src="./audio/tencent/cr/1089_134686_000002_000002_noise_out_3a.wav"></audio> </td>
+       <th align="center">SpeechRefiner(General)</th>
+       <td align="center"> <audio controls=""><source src="./audio/tencent/16/1089_134686_000002_000001_noise_out_3a.wav"></audio> </td>
         <td align="center"> <audio controls=""><source src="./audio/tencent/16/1089_134686_000002_000002_noise_out_3a.wav"></audio> </td>
+       <td align="center"> <audio controls=""><source src="./audio/tencent/16/1089_134686_000009_000007_noise_out_3a.wav"></audio> </td>
+       <td align="center"> <audio controls=""><source src="./audio/tencent/16/1089_134686_000011_000001_noise_out_3a.wav"></audio> </td>
     </tr>
-    <tr>
-        <th align="center">3</th>
-        <td align="center"> <audio controls=""><source src="./audio/tencent/noisy/1089_134686_000009_000007_noise_out_3a.wav"></audio> </td>
-        <td align="center"> <audio controls=""><source src="./audio/tencent/vf/1089_134686_000009_000007_noise_out_3a.wav"></audio> </td>
-        <td align="center"> <audio controls=""><source src="./audio/tencent/cr/1089_134686_000009_000007_noise_out_3a.wav"></audio> </td>
-        <td align="center"> <audio controls=""><source src="./audio/tencent/16/1089_134686_000009_000007_noise_out_3a.wav"></audio> </td>
 
-    </tr>
-  <tr>
-        <th align="center">4</th>
-        <td align="center"> <audio controls=""><source src="./audio/tencent/noisy/1089_134686_000011_000001_noise_out_3a.wav"></audio> </td>
-        <td align="center"> <audio controls=""><source src="./audio/tencent/vf/1089_134686_000011_000001_noise_out_3a.wav"></audio> </td>
-        <td align="center"> <audio controls=""><source src="./audio/tencent/cr/1089_134686_000011_000001_noise_out_3a.wav"></audio> </td>
-        <td align="center"> <audio controls=""><source src="./audio/tencent/16/1089_134686_000011_000001_noise_out_3a.wav"></audio> </td>
-    </tr>
 </tbody>
 </table><br />
 <table border="1" style="border-collapse: collapse; white-space: nowrap;">
 <tbody>
 
-    <h3>Dereverberation: SGMSE+[2] </h3>
+    <h3>Speech Enhancement:  CDiffuSE[2] </h3>
             <tr>
         <th align="center"> Audio No.<br /></th>
+                <th align="center"> Audio No.5<br /></th>
+        <th align="center"> Audio N0.6<br /></th>
+        <th align="center"> Audio N0.7<br /></th>
+        <th align="center"> Audio N0.8<br /></th>
         <th align="center"> Distorted Speech<br /></th>
         <th align="center"> VoiceFixer[1]<br /></th>
-        <th align="center"> VoiceFixer<sub>conformer</sub><br /></th>
-        <th align="center"> SpeechRefiner<br /></th>
+        <th align="center"> Diffiner+</sub><br /></th>
+        <th align="center"> SpeechRefiner(Specific)<br /></th>
     </tr>
      <tr>
          <th align="center">5</th>
